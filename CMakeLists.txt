@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 
-cmake_policy(SET CMP0054 NEW)
+project(nanogui CXX)
 
 set(CMAKE_DISABLE_SOURCE_CHANGES ON)
 set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
@@ -26,6 +26,8 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 
 #include(cmake/config.cmake)
 #include(cmake/compiler.cmake)
+
+include(cmake/resources.cmake)
 
 include_directories(include)
 add_subdirectory(src)

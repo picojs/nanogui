@@ -39,6 +39,8 @@ set(SRC
     ${SRCROOT}/popupbutton.cpp
     ${INCROOT}/progressbar.h
     ${SRCROOT}/progressbar.cpp
+    ${INCROOT}/resources.h
+    ${SRCROOT}/resources.cpp
     ${INCROOT}/screen.h
     ${SRCROOT}/screen.cpp
     ${INCROOT}/slider.h
@@ -63,3 +65,4 @@ set(SRC
 
 add_library(nanogui-static STATIC ${SRC})
 target_include_directories(nanogui-static PUBLIC ${eigen_SOURCE_DIR} ${nanovg_SOURCE_DIR}/include)
+#add_dependencies(nanogui-static nanogui_resources.cpp nanogui_resources.h)
