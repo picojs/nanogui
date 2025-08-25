@@ -5,10 +5,11 @@ project(nanogui CXX)
 set(CMAKE_DISABLE_SOURCE_CHANGES ON)
 set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 
-option(NANOGUI_BUILD_EXAMPLE "Build NanoGUI example application" OFF)
-option(NANOGUI_BUILD_SHARED  "Build NanoGUI as a shared library" OFF)
-option(NANOGUI_USE_GLAD      "Use Glad OpenGL loader library"    ON)
-option(NANOGUI_INSTALL       "Install NanoGUI on `make install`" OFF)
+option(NANOGUI_BUILD_EXAMPLES "Build NanoGUI example application" ON)
+option(NANOGUI_BUILD_SHARED   "Build NanoGUI as a shared library" ON)
+option(NANOGUI_BUILD_STATIC   "Build NanoGUI as a static library" OFF)
+option(NANOGUI_USE_GLAD       "Use Glad OpenGL loader library"    ON)
+option(NANOGUI_INSTALL        "Install NanoGUI on `make install`" OFF)
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
@@ -28,6 +29,8 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 #include(cmake/compiler.cmake)
 
 include(cmake/resources.cmake)
+
+add_subdirectory(examples)
 
 include_directories(include)
 add_subdirectory(src)

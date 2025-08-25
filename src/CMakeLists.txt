@@ -12,8 +12,12 @@ set(SRC
     ${SRCROOT}/checkbox.cpp
     ${INCROOT}/colorpicker.h
     ${SRCROOT}/colorpicker.cpp
+    ${INCROOT}/colorwheel.h
+    ${SRCROOT}/colorwheel.cpp
     ${INCROOT}/combobox.h
     ${SRCROOT}/combobox.cpp
+    ${INCROOT}/common.h
+    ${SRCROOT}/common.cpp
     ${INCROOT}/formhelper.h
     ${INCROOT}/glcanvas.h
     ${SRCROOT}/glcanvas.cpp
@@ -41,6 +45,7 @@ set(SRC
     ${SRCROOT}/progressbar.cpp
     ${INCROOT}/resources.h
     ${SRCROOT}/resources.cpp
+    ${SRCROOT}/serializer.cpp
     ${INCROOT}/screen.h
     ${SRCROOT}/screen.cpp
     ${INCROOT}/slider.h
@@ -63,6 +68,15 @@ set(SRC
     ${SRCROOT}/window.cpp
 )
 
-add_library(nanogui-static STATIC ${SRC})
-target_include_directories(nanogui-static PUBLIC ${eigen_SOURCE_DIR} ${nanovg_SOURCE_DIR}/include)
-#add_dependencies(nanogui-static nanogui_resources.cpp nanogui_resources.h)
+if (NANOGUI_BUILD_SHARED)
+    add_library(nanogui SHARED ${SRC})
+    target_link_libraries(nanogui glfw nanovg-static ${NANOGUI_EXTRA_LIBS})
+    #add_dependencies(nanogui nanogui_resources.cpp nanogui_resources.h)
+endif()
+
+if (NANOGUI_BUILD_STATIC)
+    add_library(nanogui-static STATIC ${SRC})
+    target_link_libraries(nanogui-static glfw nanovg-static ${NANOGUI_EXTRA_LIBS})
+    #target_include_directories(nanogui-static PUBLIC ${eigen_SOURCE_DIR} ${nanovg_SOURCE_DIR}/include)
+    #add_dependencies(nanogui-static nanogui_resources.cpp nanogui_resources.h)
+endif()
