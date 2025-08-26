@@ -29,5 +29,5 @@ if(NANOGUI_BUILD_EXAMPLES)
     target_include_directories(example_icons PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
     # Copy icons for example application
-    file(COPY ${CMAKE_SOURCE_DIR}/resources/icons DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    file(COPY ${CMAKE_SOURCE_DIR}/resources/icons DESTINATION ${CMAKE_BINARY_DIR}/resources)
 endif()
