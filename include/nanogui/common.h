@@ -527,4 +527,61 @@ extern NANOGUI_EXPORT std::vector<std::pair<int, std::string>>
 /// Helper function used by nvgImageIcon
 extern NANOGUI_EXPORT int __nanogui_get_image(NVGcontext *ctx, const std::string &name, uint8_t *data, uint32_t size);
 
+template<typename T>
+class Size
+{
+public:
+    Size(T w, T h) : mW(w), mH(h) {}
+
+    T w() { return mW; }
+    T h() { return mH; }
+
+    void setW(T w) { mW = w; }
+    void setH(T h) { mH = h; }
+
+private:
+    T mW;
+    T mH;
+};
+
+template<typename T>
+class Point
+{
+public:
+    Point(T x, T y) : mX(x), mY(y) {}
+
+    T x() { return mX; }
+    T y() { return mY; }
+
+    void setX(T x) { mX = x; }
+    void setY(T y) { mY = y; }
+
+private:
+    T mX;
+    T mY;
+};
+
+template<typename T>
+class Rect
+{
+public:
+    Rect(T x, T y, T w, T h) : mX(x), mY(y), mW(w), mH(h) {}
+
+    T x() { return mX; }
+    T y() { return mY; }
+    T w() { return mW; }
+    T h() { return mH; }
+
+    void setX(T x) { mX = x; }
+    void setY(T y) { mY = y; }
+    void setW(T w) { mW = w; }
+    void setH(T h) { mH = h; }
+
+private:
+    T mX;
+    T mY;
+    T mW;
+    T mH;
+};
+
 NAMESPACE_END(nanogui)
