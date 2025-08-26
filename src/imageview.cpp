@@ -330,14 +330,14 @@ void ImageView::updateImageParameters() {
 void ImageView::drawWidgetBorder(NVGcontext* ctx) const {
     nvgBeginPath(ctx);
     nvgStrokeWidth(ctx, 1);
-    nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + 0.5f, mSize.x() - 1,
-                   mSize.y() - 1, 0);
+    nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + 0.5f, mSize.w() - 1,
+                   mSize.h() - 1, 0);
     nvgStrokeColor(ctx, mTheme->mWindowPopup);
     nvgStroke(ctx);
 
     nvgBeginPath(ctx);
-    nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + 0.5f, mSize.x() - 1,
-                   mSize.y() - 1, mTheme->mButtonCornerRadius);
+    nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + 0.5f, mSize.w() - 1,
+                   mSize.h() - 1, mTheme->mButtonCornerRadius);
     nvgStrokeColor(ctx, mTheme->mBorderDark);
     nvgStroke(ctx);
 }
@@ -345,7 +345,7 @@ void ImageView::drawWidgetBorder(NVGcontext* ctx) const {
 void ImageView::drawImageBorder(NVGcontext* ctx) const {
     nvgSave(ctx);
     nvgBeginPath(ctx);
-    nvgScissor(ctx, mPos.x(), mPos.y(), mSize.x(), mSize.y());
+    nvgScissor(ctx, mPos.x(), mPos.y(), mSize.w(), mSize.h());
     nvgStrokeWidth(ctx, 1.0f);
     Vector2i borderPosition = mPos + mOffset.cast<int>();
     Vector2i borderSize = scaledImageSizeF().cast<int>();

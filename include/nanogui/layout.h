@@ -66,7 +66,7 @@ public:
      *     The preferred size, accounting for things such as spacing, padding
      *     for icons, etc.
      */
-    virtual Vector2i preferredSize(NVGcontext *ctx, const Widget *widget) const = 0;
+    virtual Areai preferredSize(NVGcontext *ctx, const Widget *widget) const = 0;
 
 protected:
     /// Default destructor (exists for inheritance).

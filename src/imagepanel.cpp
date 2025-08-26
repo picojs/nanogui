@@ -21,7 +21,7 @@ ImagePanel::ImagePanel(Widget *parent)
 
 Vector2i ImagePanel::gridSize() const {
     int nCols = 1 + std::max(0,
-        (int) ((mSize.x() - 2 * mMargin - mThumbSize) /
+        (int) ((mSize.w() - 2 * mMargin - mThumbSize) /
         (float) (mThumbSize + mSpacing)));
     int nRows = ((int) mImages.size() + nCols - 1) / nCols;
     return Vector2i(nCols, nRows);

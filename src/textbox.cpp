@@ -59,8 +59,8 @@ void TextBox::setTheme(Theme *theme) {
         mFontSize = mTheme->mTextBoxFontSize;
 }
 
-Vector2i TextBox::preferredSize(NVGcontext *ctx) const {
-    Vector2i size(0, fontSize() * 1.4f);
+Areai TextBox::preferredSize(NVGcontext *ctx) const {
+    Areai size(0, fontSize() * 1.4f);
 
     float uw = 0;
     if (mUnitsImage > 0) {
@@ -85,18 +85,18 @@ void TextBox::draw(NVGcontext* ctx) {
     Widget::draw(ctx);
 
     NVGpaint bg = nvgBoxGradient(ctx,
-        mPos.x() + 1, mPos.y() + 1 + 1.0f, mSize.x() - 2, mSize.y() - 2,
+        mPos.x() + 1, mPos.y() + 1 + 1.0f, mSize.w() - 2, mSize.h() - 2,
         3, 4, Color(255, 32), Color(32, 32));
     NVGpaint fg1 = nvgBoxGradient(ctx,
-        mPos.x() + 1, mPos.y() + 1 + 1.0f, mSize.x() - 2, mSize.y() - 2,
+        mPos.x() + 1, mPos.y() + 1 + 1.0f, mSize.w() - 2, mSize.h() - 2,
         3, 4, Color(150, 32), Color(32, 32));
     NVGpaint fg2 = nvgBoxGradient(ctx,
-        mPos.x() + 1, mPos.y() + 1 + 1.0f, mSize.x() - 2, mSize.y() - 2,
+        mPos.x() + 1, mPos.y() + 1 + 1.0f, mSize.w() - 2, mSize.h() - 2,
         3, 4, nvgRGBA(255, 0, 0, 100), nvgRGBA(255, 0, 0, 50));
 
     nvgBeginPath(ctx);
-    nvgRoundedRect(ctx, mPos.x() + 1, mPos.y() + 1 + 1.0f, mSize.x() - 2,
-                   mSize.y() - 2, 3);
+    nvgRoundedRect(ctx, mPos.x() + 1, mPos.y() + 1 + 1.0f, mSize.w() - 2,
+                   mSize.h() - 2, 3);
 
     if (mEditable && focused())
         mValidFormat ? nvgFillPaint(ctx, fg1) : nvgFillPaint(ctx, fg2);
@@ -108,30 +108,30 @@ void TextBox::draw(NVGcontext* ctx) {
     nvgFill(ctx);
 
     nvgBeginPath(ctx);
-    nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + 0.5f, mSize.x() - 1,
-                   mSize.y() - 1, 2.5f);
+    nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + 0.5f, mSize.w() - 1,
+                   mSize.h() - 1, 2.5f);
     nvgStrokeColor(ctx, Color(0, 48));
     nvgStroke(ctx);
 
     nvgFontSize(ctx, fontSize());
     nvgFontFace(ctx, "sans");
-    Vector2i drawPos(mPos.x(), mPos.y() + mSize.y() * 0.5f + 1);
+    Vector2i drawPos(mPos.x(), mPos.y() + mSize.h() * 0.5f + 1);
 
-    float xSpacing = mSize.y() * 0.3f;
+    float xSpacing = mSize.h() * 0.3f;
 
     float unitWidth = 0;
 
     if (mUnitsImage > 0) {
         int w, h;
         nvgImageSize(ctx, mUnitsImage, &w, &h);
-        float unitHeight = mSize.y() * 0.4f;
+        float unitHeight = mSize.h() * 0.4f;
         unitWidth = w * unitHeight / h;
         NVGpaint imgPaint = nvgImagePattern(
-            ctx, mPos.x() + mSize.x() - xSpacing - unitWidth,
+            ctx, mPos.x() + mSize.w() - xSpacing - unitWidth,
             drawPos.y() - unitHeight * 0.5f, unitWidth, unitHeight, 0,
             mUnitsImage, mEnabled ? 0.7f : 0.35f);
         nvgBeginPath(ctx);
-        nvgRect(ctx, mPos.x() + mSize.x() - xSpacing - unitWidth,
+        nvgRect(ctx, mPos.x() + mSize.w() - xSpacing - unitWidth,
                 drawPos.y() - unitHeight * 0.5f, unitWidth, unitHeight);
         nvgFillPaint(ctx, imgPaint);
         nvgFill(ctx);
@@ -140,7 +140,7 @@ void TextBox::draw(NVGcontext* ctx) {
         unitWidth = nvgTextBounds(ctx, 0, 0, mUnits.c_str(), nullptr, nullptr);
         nvgFillColor(ctx, Color(255, mEnabled ? 64 : 32));
         nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_MIDDLE);
-        nvgText(ctx, mPos.x() + mSize.x() - xSpacing, drawPos.y(),
+        nvgText(ctx, mPos.x() + mSize.w() - xSpacing, drawPos.y(),
                 mUnits.c_str(), nullptr);
         unitWidth += 2;
     }
@@ -161,7 +161,7 @@ void TextBox::draw(NVGcontext* ctx) {
             auto icon = utf8(mTheme->mTextBoxUpIcon);
             nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
             Vector2f iconPos(mPos.x() + 4.f,
-                             mPos.y() + mSize.y()/2.f - xSpacing/2.f);
+                             mPos.y() + mSize.h()/2.f - xSpacing/2.f);
             nvgText(ctx, iconPos.x(), iconPos.y(), icon.data(), nullptr);
         }
 
@@ -171,7 +171,7 @@ void TextBox::draw(NVGcontext* ctx) {
             auto icon = utf8(mTheme->mTextBoxDownIcon);
             nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
             Vector2f iconPos(mPos.x() + 4.f,
-                             mPos.y() + mSize.y()/2.f + xSpacing/2.f + 1.5f);
+                             mPos.y() + mSize.h()/2.f + xSpacing/2.f + 1.5f);
             nvgText(ctx, iconPos.x(), iconPos.y(), icon.data(), nullptr);
         }
 
@@ -186,11 +186,11 @@ void TextBox::draw(NVGcontext* ctx) {
             break;
         case Alignment::Right:
             nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_MIDDLE);
-            drawPos.x() += mSize.x() - unitWidth - xSpacing;
+            drawPos.x() += mSize.w() - unitWidth - xSpacing;
             break;
         case Alignment::Center:
             nvgTextAlign(ctx, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
-            drawPos.x() += mSize.x() * 0.5f;
+            drawPos.x() += mSize.w() * 0.5f;
             break;
     }
 
@@ -202,8 +202,8 @@ void TextBox::draw(NVGcontext* ctx) {
     // clip visible text area
     float clipX = mPos.x() + xSpacing + spinArrowsWidth - 1.0f;
     float clipY = mPos.y() + 1.0f;
-    float clipWidth = mSize.x() - unitWidth - spinArrowsWidth - 2 * xSpacing + 2.0f;
-    float clipHeight = mSize.y() - 3.0f;
+    float clipWidth = mSize.w() - unitWidth - spinArrowsWidth - 2 * xSpacing + 2.0f;
+    float clipHeight = mSize.h() - 3.0f;
 
     nvgSave(ctx);
     nvgIntersectScissor(ctx, clipX, clipY, clipWidth, clipHeight);
@@ -622,9 +622,9 @@ int TextBox::position2CursorIndex(float posx, float lastx,
 
 TextBox::SpinArea TextBox::spinArea(const Vector2i & pos) {
     if (0 <= pos.x() - mPos.x() && pos.x() - mPos.x() < 14.f) { /* on scrolling arrows */
-        if (mSize.y() >= pos.y() - mPos.y() && pos.y() - mPos.y() <= mSize.y() / 2.f) { /* top part */
+        if (mSize.h() >= pos.y() - mPos.y() && pos.y() - mPos.y() <= mSize.h() / 2.f) { /* top part */
             return SpinArea::Top;
-        } else if (0.f <= pos.y() - mPos.y() && pos.y() - mPos.y() > mSize.y() / 2.f) { /* bottom part */
+        } else if (0.f <= pos.y() - mPos.y() && pos.y() - mPos.y() > mSize.h() / 2.f) { /* bottom part */
             return SpinArea::Bottom;
         }
     }

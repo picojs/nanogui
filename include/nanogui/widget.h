@@ -67,19 +67,19 @@ public:
     }
 
     /// Return the size of the widget
-    const Vector2i &size() const { return mSize; }
+    const Areai &size() const { return mSize; }
     /// set the size of the widget
-    void setSize(const Vector2i &size) { mSize = size; }
+    void setSize(const Areai &size) { mSize = size; }
 
     /// Return the width of the widget
-    int width() const { return mSize.x(); }
+    int width() const { return mSize.w(); }
     /// Set the width of the widget
-    void setWidth(int width) { mSize.x() = width; }
+    void setWidth(int width) { mSize.setW(width); }
 
     /// Return the height of the widget
-    int height() const { return mSize.y(); }
+    int height() const { return mSize.h(); }
     /// Set the height of the widget
-    void setHeight(int height) { mSize.y() = height; }
+    void setHeight(int height) { mSize.setH(height); }
 
     /**
      * \brief Set the fixed size of this widget
@@ -90,19 +90,19 @@ public:
      * size; this is done with a call to \ref setSize or a call to \ref performLayout()
      * in the parent widget.
      */
-    void setFixedSize(const Vector2i &fixedSize) { mFixedSize = fixedSize; }
+    void setFixedSize(const Areai &fixedSize) { mFixedSize = fixedSize; }
 
     /// Return the fixed size (see \ref setFixedSize())
-    const Vector2i &fixedSize() const { return mFixedSize; }
+    const Areai &fixedSize() const { return mFixedSize; }
 
     // Return the fixed width (see \ref setFixedSize())
-    int fixedWidth() const { return mFixedSize.x(); }
+    int fixedWidth() const { return mFixedSize.w(); }
     // Return the fixed height (see \ref setFixedSize())
-    int fixedHeight() const { return mFixedSize.y(); }
+    int fixedHeight() const { return mFixedSize.h(); }
     /// Set the fixed width (see \ref setFixedSize())
-    void setFixedWidth(int width) { mFixedSize.x() = width; }
+    void setFixedWidth(int width) { mFixedSize.setW(width); }
     /// Set the fixed height (see \ref setFixedSize())
-    void setFixedHeight(int height) { mFixedSize.y() = height; }
+    void setFixedHeight(int height) { mFixedSize.setH(height); }
 
     /// Return whether or not the widget is currently visible (assuming all parents are visible)
     bool visible() const { return mVisible; }
@@ -244,7 +244,7 @@ public:
     virtual bool keyboardCharacterEvent(unsigned int codepoint);
 
     /// Compute the preferred size of the widget
-    virtual Vector2i preferredSize(NVGcontext *ctx) const;
+    virtual Areai preferredSize(NVGcontext *ctx) const;
 
     /// Invoke the associated layout generator to properly place child widgets, if any
     virtual void performLayout(NVGcontext *ctx);
@@ -279,7 +279,8 @@ protected:
     ref<Theme> mTheme;
     ref<Layout> mLayout;
     std::string mId;
-    Vector2i mPos, mSize, mFixedSize;
+    Vector2i mPos;
+    Areai mSize, mFixedSize;
     std::vector<Widget *> mChildren;
 
     /**

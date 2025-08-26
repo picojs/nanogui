@@ -18,8 +18,8 @@ NAMESPACE_BEGIN(nanogui)
 ProgressBar::ProgressBar(Widget *parent)
     : Widget(parent), mValue(0.0f) {}
 
-Vector2i ProgressBar::preferredSize(NVGcontext *) const {
-    return Vector2i(70, 12);
+Areai ProgressBar::preferredSize(NVGcontext *) const {
+    return Areai(70, 12);
 }
 
 void ProgressBar::draw(NVGcontext* ctx) {

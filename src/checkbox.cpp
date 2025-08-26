@@ -46,12 +46,12 @@ bool CheckBox::mouseButtonEvent(const Vector2i &p, int button, bool down,
     return false;
 }
 
-Vector2i CheckBox::preferredSize(NVGcontext *ctx) const {
+Areai CheckBox::preferredSize(NVGcontext *ctx) const {
     if (mFixedSize != Vector2i::Zero())
         return mFixedSize;
     nvgFontSize(ctx, fontSize());
     nvgFontFace(ctx, "sans");
-    return Vector2i(
+    return Areai(
         nvgTextBounds(ctx, 0, 0, mCaption.c_str(), nullptr, nullptr) +
             1.8f * fontSize(),
         fontSize() * 1.3f);
@@ -65,28 +65,28 @@ void CheckBox::draw(NVGcontext *ctx) {
     nvgFillColor(ctx,
                  mEnabled ? mTheme->mTextColor : mTheme->mDisabledTextColor);
     nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
-    nvgText(ctx, mPos.x() + 1.6f * fontSize(), mPos.y() + mSize.y() * 0.5f,
+    nvgText(ctx, mPos.x() + 1.6f * fontSize(), mPos.y() + mSize.h() * 0.5f,
             mCaption.c_str(), nullptr);
 
     NVGpaint bg = nvgBoxGradient(ctx, mPos.x() + 1.5f, mPos.y() + 1.5f,
-                                 mSize.y() - 2.0f, mSize.y() - 2.0f, 3, 3,
+                                 mSize.h() - 2.0f, mSize.h() - 2.0f, 3, 3,
                                  mPushed ? Color(0, 100) : Color(0, 32),
                                  Color(0, 0, 0, 180));
 
     nvgBeginPath(ctx);
-    nvgRoundedRect(ctx, mPos.x() + 1.0f, mPos.y() + 1.0f, mSize.y() - 2.0f,
-                   mSize.y() - 2.0f, 3);
+    nvgRoundedRect(ctx, mPos.x() + 1.0f, mPos.y() + 1.0f, mSize.h() - 2.0f,
+                   mSize.h() - 2.0f, 3);
     nvgFillPaint(ctx, bg);
     nvgFill(ctx);
 
     if (mChecked) {
-        nvgFontSize(ctx, mSize.y() * icon_scale());
+        nvgFontSize(ctx, mSize.h() * icon_scale());
         nvgFontFace(ctx, "icons");
         nvgFillColor(ctx, mEnabled ? mTheme->mIconColor
                                    : mTheme->mDisabledTextColor);
         nvgTextAlign(ctx, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
-        nvgText(ctx, mPos.x() + mSize.y() * 0.5f + 1,
-                mPos.y() + mSize.y() * 0.5f, utf8(mTheme->mCheckBoxIcon).data(),
+        nvgText(ctx, mPos.x() + mSize.h() * 0.5f + 1,
+                mPos.y() + mSize.h() * 0.5f, utf8(mTheme->mCheckBoxIcon).data(),
                 nullptr);
     }
 }

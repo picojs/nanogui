@@ -31,9 +31,9 @@ bool Slider::mouseDragEvent(const Vector2i &p, const Vector2i & /* rel */,
     if (!mEnabled)
         return false;
 
-    const float kr = (int) (mSize.y() * 0.4f), kshadow = 3;
+    const float kr = (int) (mSize.h() * 0.4f), kshadow = 3;
     const float startX = kr + kshadow + mPos.x() - 1;
-    const float widthX = mSize.x() - 2 * (kr + kshadow);
+    const float widthX = mSize.w() - 2 * (kr + kshadow);
 
     float value = (p.x() - startX) / widthX;
     value = value * (mRange.second - mRange.first) + mRange.first;
@@ -47,9 +47,9 @@ bool Slider::mouseButtonEvent(const Vector2i &p, int /* button */, bool down, in
     if (!mEnabled)
         return false;
 
-    const float kr = (int) (mSize.y() * 0.4f), kshadow = 3;
+    const float kr = (int) (mSize.h() * 0.4f), kshadow = 3;
     const float startX = kr + kshadow + mPos.x() - 1;
-    const float widthX = mSize.x() - 2 * (kr + kshadow);
+    const float widthX = mSize.w() - 2 * (kr + kshadow);
 
     float value = (p.x() - startX) / widthX;
     value = value * (mRange.second - mRange.first) + mRange.first;
@@ -63,10 +63,10 @@ bool Slider::mouseButtonEvent(const Vector2i &p, int /* button */, bool down, in
 
 void Slider::draw(NVGcontext* ctx) {
     Vector2f center = mPos.cast<float>() + mSize.cast<float>() * 0.5f;
-    float kr = (int) (mSize.y() * 0.4f), kshadow = 3;
+    float kr = (int) (mSize.h() * 0.4f), kshadow = 3;
 
     float startX = kr + kshadow + mPos.x();
-    float widthX = mSize.x() - 2*(kr+kshadow);
+    float widthX = mSize.w() - 2*(kr+kshadow);
 
     Vector2f knobPos(startX + (mValue - mRange.first) /
             (mRange.second - mRange.first) * widthX,
@@ -83,7 +83,7 @@ void Slider::draw(NVGcontext* ctx) {
 
     if (mHighlightedRange.second != mHighlightedRange.first) {
         nvgBeginPath(ctx);
-        nvgRoundedRect(ctx, startX + mHighlightedRange.first * mSize.x(),
+        nvgRoundedRect(ctx, startX + mHighlightedRange.first * mSize.w(),
                        center.y() - kshadow + 1,
                        widthX *
                            (mHighlightedRange.second - mHighlightedRange.first),

@@ -22,7 +22,7 @@ Button::Button(Widget *parent, const std::string &caption, int icon)
       mFlags(NormalButton), mBackgroundColor(Color(0, 0)),
       mTextColor(Color(0, 0)) { }
 
-Vector2i Button::preferredSize(NVGcontext *ctx) const {
+Areai Button::preferredSize(NVGcontext *ctx) const {
     int fontSize = mFontSize == -1 ? mTheme->mButtonFontSize : mFontSize;
     nvgFontSize(ctx, fontSize);
     nvgFontFace(ctx, "sans-bold");
@@ -35,7 +35,7 @@ Vector2i Button::preferredSize(NVGcontext *ctx) const {
             nvgFontFace(ctx, "icons");
             nvgFontSize(ctx, ih);
             iw = nvgTextBounds(ctx, 0, 0, utf8(mIcon).data(), nullptr, nullptr)
-                + mSize.y() * 0.15f;
+                + mSize.h() * 0.15f;
         } else {
             int w, h;
             ih *= 0.9f;
@@ -43,7 +43,7 @@ Vector2i Button::preferredSize(NVGcontext *ctx) const {
             iw = w * ih / h;
         }
     }
-    return Vector2i((int)(tw + iw) + 20, fontSize + 10);
+    return Areai((int)(tw + iw) + 20, fontSize + 10);
 }
 
 bool Button::mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers) {
@@ -119,8 +119,8 @@ void Button::draw(NVGcontext *ctx) {
 
     nvgBeginPath(ctx);
 
-    nvgRoundedRect(ctx, mPos.x() + 1, mPos.y() + 1.0f, mSize.x() - 2,
-                   mSize.y() - 2, mTheme->mButtonCornerRadius - 1);
+    nvgRoundedRect(ctx, mPos.x() + 1, mPos.y() + 1.0f, mSize.w() - 2,
+                   mSize.h() - 2, mTheme->mButtonCornerRadius - 1);
 
     if (mBackgroundColor.w() != 0) {
         nvgFillColor(ctx, Color(mBackgroundColor.head<3>(), 1.f));
@@ -134,21 +134,21 @@ void Button::draw(NVGcontext *ctx) {
     }
 
     NVGpaint bg = nvgLinearGradient(ctx, mPos.x(), mPos.y(), mPos.x(),
-                                    mPos.y() + mSize.y(), gradTop, gradBot);
+                                    mPos.y() + mSize.h(), gradTop, gradBot);
 
     nvgFillPaint(ctx, bg);
     nvgFill(ctx);
 
     nvgBeginPath(ctx);
     nvgStrokeWidth(ctx, 1.0f);
-    nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + (mPushed ? 0.5f : 1.5f), mSize.x() - 1,
-                   mSize.y() - 1 - (mPushed ? 0.0f : 1.0f), mTheme->mButtonCornerRadius);
+    nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + (mPushed ? 0.5f : 1.5f), mSize.w() - 1,
+                   mSize.h() - 1 - (mPushed ? 0.0f : 1.0f), mTheme->mButtonCornerRadius);
     nvgStrokeColor(ctx, mTheme->mBorderLight);
     nvgStroke(ctx);
 
     nvgBeginPath(ctx);
-    nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + 0.5f, mSize.x() - 1,
-                   mSize.y() - 2, mTheme->mButtonCornerRadius);
+    nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + 0.5f, mSize.w() - 1,
+                   mSize.h() - 2, mTheme->mButtonCornerRadius);
     nvgStrokeColor(ctx, mTheme->mBorderDark);
     nvgStroke(ctx);
 
@@ -180,7 +180,7 @@ void Button::draw(NVGcontext *ctx) {
             iw = w * ih / h;
         }
         if (mCaption != "")
-            iw += mSize.y() * 0.15f;
+            iw += mSize.h() * 0.15f;
         nvgFillColor(ctx, textColor);
         nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
         Vector2f iconPos = center;
@@ -195,7 +195,7 @@ void Button::draw(NVGcontext *ctx) {
         } else if (mIconPosition == IconPosition::Left) {
             iconPos.x() = mPos.x() + 8;
         } else if (mIconPosition == IconPosition::Right) {
-            iconPos.x() = mPos.x() + mSize.x() - iw - 8;
+            iconPos.x() = mPos.x() + mSize.w() - iw - 8;
         }
 
         if (nvgIsFontIcon(mIcon)) {

@@ -25,8 +25,8 @@ ColorWheel::ColorWheel(Widget *parent, const Color& rgb)
     setColor(rgb);
 }
 
-Vector2i ColorWheel::preferredSize(NVGcontext *) const {
-    return { 100, 100. };
+Areai ColorWheel::preferredSize(NVGcontext *) const {
+    return Areai(100, 100);
 }
 
 void ColorWheel::draw(NVGcontext *ctx) {

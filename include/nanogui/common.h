@@ -533,8 +533,8 @@ class Area
 public:
     Area(T w, T h) : mW(w), mH(h) {}
 
-    T w() { return mW; }
-    T h() { return mH; }
+    T w() const { return mW; }
+    T h() const { return mH; }
 
     void setW(T w) { mW = w; }
     void setH(T h) { mH = h; }
@@ -550,8 +550,8 @@ class Point
 public:
     Point(T x, T y) : mX(x), mY(y) {}
 
-    T x() { return mX; }
-    T y() { return mY; }
+    T x() const { return mX; }
+    T y() const { return mY; }
 
     void setX(T x) { mX = x; }
     void setY(T y) { mY = y; }
@@ -567,10 +567,10 @@ class Rect
 public:
     Rect(T x, T y, T w, T h) : mX(x), mY(y), mW(w), mH(h) {}
 
-    T x() { return mX; }
-    T y() { return mY; }
-    T w() { return mW; }
-    T h() { return mH; }
+    T x() const { return mX; }
+    T y() const { return mY; }
+    T w() const { return mW; }
+    T h() const { return mH; }
 
     void setX(T x) { mX = x; }
     void setY(T y) { mY = y; }

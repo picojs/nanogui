@@ -400,7 +400,7 @@ void GLFramebuffer::blit() {
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
     glDrawBuffer(GL_BACK);
 
-    glBlitFramebuffer(0, 0, mSize.x(), mSize.y(), 0, 0, mSize.x(), mSize.y(),
+    glBlitFramebuffer(0, 0, mSize.w(), mSize.h(), 0, 0, mSize.w(), mSize.h(),
                       GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -409,7 +409,7 @@ void GLFramebuffer::blit() {
 void GLFramebuffer::downloadTGA(const std::string &filename) {
     uint8_t *temp = new uint8_t[mSize.prod() * 4];
 
-    std::cout << "Writing \"" << filename  << "\" (" << mSize.x() << "x" << mSize.y() << ") .. ";
+    std::cout << "Writing \"" << filename  << "\" (" << mSize.w() << "x" << mSize.h() << ") .. ";
     std::cout.flush();
     glPixelStorei(GL_PACK_ALIGNMENT, 1);
     glBindFramebuffer(GL_READ_FRAMEBUFFER, mFramebuffer);

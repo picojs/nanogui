@@ -70,7 +70,7 @@ void Window::draw(NVGcontext *ctx) {
     /* Draw window */
     nvgSave(ctx);
     nvgBeginPath(ctx);
-    nvgRoundedRect(ctx, mPos.x(), mPos.y(), mSize.x(), mSize.y(), cr);
+    nvgRoundedRect(ctx, mPos.x(), mPos.y(), mSize.w(), mSize.h(), cr);
 
     nvgFillColor(ctx, mMouseFocus ? mTheme->mWindowFillFocused
                                   : mTheme->mWindowFillUnfocused);
@@ -79,14 +79,14 @@ void Window::draw(NVGcontext *ctx) {
 
     /* Draw a drop shadow */
     NVGpaint shadowPaint = nvgBoxGradient(
-        ctx, mPos.x(), mPos.y(), mSize.x(), mSize.y(), cr*2, ds*2,
+        ctx, mPos.x(), mPos.y(), mSize.w(), mSize.h(), cr*2, ds*2,
         mTheme->mDropShadow, mTheme->mTransparent);
 
     nvgSave(ctx);
     nvgResetScissor(ctx);
     nvgBeginPath(ctx);
-    nvgRect(ctx, mPos.x()-ds,mPos.y()-ds, mSize.x()+2*ds, mSize.y()+2*ds);
-    nvgRoundedRect(ctx, mPos.x(), mPos.y(), mSize.x(), mSize.y(), cr);
+    nvgRect(ctx, mPos.x()-ds,mPos.y()-ds, mSize.w()+2*ds, mSize.h()+2*ds);
+    nvgRoundedRect(ctx, mPos.x(), mPos.y(), mSize.w(), mSize.h(), cr);
     nvgPathWinding(ctx, NVG_HOLE);
     nvgFillPaint(ctx, shadowPaint);
     nvgFill(ctx);
@@ -101,23 +101,23 @@ void Window::draw(NVGcontext *ctx) {
             mTheme->mWindowHeaderGradientBot);
 
         nvgBeginPath(ctx);
-        nvgRoundedRect(ctx, mPos.x(), mPos.y(), mSize.x(), hh, cr);
+        nvgRoundedRect(ctx, mPos.x(), mPos.y(), mSize.w(), hh, cr);
 
         nvgFillPaint(ctx, headerPaint);
         nvgFill(ctx);
 
         nvgBeginPath(ctx);
-        nvgRoundedRect(ctx, mPos.x(), mPos.y(), mSize.x(), hh, cr);
+        nvgRoundedRect(ctx, mPos.x(), mPos.y(), mSize.w(), hh, cr);
         nvgStrokeColor(ctx, mTheme->mWindowHeaderSepTop);
 
         nvgSave(ctx);
-        nvgIntersectScissor(ctx, mPos.x(), mPos.y(), mSize.x(), 0.5f);
+        nvgIntersectScissor(ctx, mPos.x(), mPos.y(), mSize.w(), 0.5f);
         nvgStroke(ctx);
         nvgRestore(ctx);
 
         nvgBeginPath(ctx);
         nvgMoveTo(ctx, mPos.x() + 0.5f, mPos.y() + hh - 1.5f);
-        nvgLineTo(ctx, mPos.x() + mSize.x() - 0.5f, mPos.y() + hh - 1.5);
+        nvgLineTo(ctx, mPos.x() + mSize.w() - 0.5f, mPos.y() + hh - 1.5);
         nvgStrokeColor(ctx, mTheme->mWindowHeaderSepBot);
         nvgStroke(ctx);
 
@@ -127,13 +127,13 @@ void Window::draw(NVGcontext *ctx) {
 
         nvgFontBlur(ctx, 2);
         nvgFillColor(ctx, mTheme->mDropShadow);
-        nvgText(ctx, mPos.x() + mSize.x() / 2,
+        nvgText(ctx, mPos.x() + mSize.w() / 2,
                 mPos.y() + hh / 2, mTitle.c_str(), nullptr);
 
         nvgFontBlur(ctx, 0);
         nvgFillColor(ctx, mFocused ? mTheme->mWindowTitleFocused
                                    : mTheme->mWindowTitleUnfocused);
-        nvgText(ctx, mPos.x() + mSize.x() / 2, mPos.y() + hh / 2 - 1,
+        nvgText(ctx, mPos.x() + mSize.w() / 2, mPos.y() + hh / 2 - 1,
                 mTitle.c_str(), nullptr);
     }
 
