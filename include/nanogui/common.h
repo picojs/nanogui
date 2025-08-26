@@ -528,10 +528,10 @@ extern NANOGUI_EXPORT std::vector<std::pair<int, std::string>>
 extern NANOGUI_EXPORT int __nanogui_get_image(NVGcontext *ctx, const std::string &name, uint8_t *data, uint32_t size);
 
 template<typename T>
-class Size
+class Area
 {
 public:
-    Size(T w, T h) : mW(w), mH(h) {}
+    Area(T w, T h) : mW(w), mH(h) {}
 
     T w() { return mW; }
     T h() { return mH; }
@@ -583,5 +583,14 @@ private:
     T mW;
     T mH;
 };
+
+using Areai = Area<int>;
+using Areaf = Area<float>;
+
+using Pointi = Point<int>;
+using Pointf = Point<float>;
+
+using Recti = Rect<int>;
+using Rectf = Rect<float>;
 
 NAMESPACE_END(nanogui)
