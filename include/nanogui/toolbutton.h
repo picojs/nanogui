@@ -27,7 +27,7 @@ public:
            const std::string &caption = "")
         : Button(parent, caption, icon) {
         setFlags(Flags::RadioButton | Flags::ToggleButton);
-        setFixedSize(Vector2i(25, 25));
+        setFixedSize(Area2i(25, 25));
     }
 public:
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW

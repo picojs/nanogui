@@ -242,7 +242,7 @@ public:
         VScrollPanel *vscroll = new VScrollPanel(popup);
         ImagePanel *imgPanel = new ImagePanel(vscroll);
         imgPanel->setImages(icons);
-        popup->setFixedSize(Vector2i(245, 150));
+        popup->setFixedSize(Area2i(245, 150));
 
         auto imageWindow = new Window(this, "Selected image");
         imageWindow->setPosition(Vector2i(710, 15));
@@ -322,7 +322,7 @@ public:
         slider->setFixedWidth(80);
 
         TextBox *textBox = new TextBox(panel);
-        textBox->setFixedSize(Vector2i(60, 25));
+        textBox->setFixedSize(Area2i(60, 25));
         textBox->setValue("50");
         textBox->setUnits("%");
         slider->setCallback([textBox](float value) {
@@ -331,7 +331,7 @@ public:
         slider->setFinalCallback([&](float value) {
             cout << "Final slider value: " << (int) (value * 100) << endl;
         });
-        textBox->setFixedSize(Vector2i(60,25));
+        textBox->setFixedSize(Area2i(60,25));
         textBox->setFontSize(20);
         textBox->setAlignment(TextBox::Alignment::Right);
 
@@ -406,7 +406,7 @@ public:
         ib->setEditable(true);
 
         b = panel->add<Button>("", ENTYPO_ICON_FORWARD);
-        b->setFixedSize(Vector2i(22, 22));
+        b->setFixedSize(Area2i(22, 22));
         ib->setFixedHeight(22);
         b->setCallback([tabWidget, ib] {
             int value = ib->value();
@@ -430,7 +430,7 @@ public:
             new Label(window, "Floating point :", "sans-bold");
             textBox = new TextBox(window);
             textBox->setEditable(true);
-            textBox->setFixedSize(Vector2i(100, 20));
+            textBox->setFixedSize(Area2i(100, 20));
             textBox->setValue("50");
             textBox->setUnits("GiB");
             textBox->setDefaultValue("0.0");
@@ -442,7 +442,7 @@ public:
             new Label(window, "Positive integer :", "sans-bold");
             auto intBox = new IntBox<int>(window);
             intBox->setEditable(true);
-            intBox->setFixedSize(Vector2i(100, 20));
+            intBox->setFixedSize(Area2i(100, 20));
             intBox->setValue(50);
             intBox->setUnits("Mhz");
             intBox->setDefaultValue("0");
@@ -465,7 +465,7 @@ public:
         ComboBox *cobo =
             new ComboBox(window, { "Item 1", "Item 2", "Item 3" });
         cobo->setFontSize(16);
-        cobo->setFixedSize(Vector2i(100,20));
+        cobo->setFixedSize(Area2i(100,20));
 
         new Label(window, "Color picker :", "sans-bold");
         auto cp = new ColorPicker(window, {255, 120, 0, 255});

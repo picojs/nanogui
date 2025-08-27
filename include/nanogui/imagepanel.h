@@ -39,7 +39,7 @@ public:
     virtual Area2i preferredSize(NVGcontext *ctx) const override;
     virtual void draw(NVGcontext* ctx) override;
 protected:
-    Vector2i gridSize() const;
+    Area2i gridSize() const;
     int indexForPosition(const Vector2i &p) const;
 protected:
     Images mImages;

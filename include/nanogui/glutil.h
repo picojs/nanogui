@@ -483,7 +483,7 @@ public:
 class NANOGUI_EXPORT GLFramebuffer {
 public:
     /// Default constructor: unusable until you call the ``init()`` method
-    GLFramebuffer() : mFramebuffer(0), mDepth(0), mColor(0), mSamples(0) { }
+    GLFramebuffer() : mFramebuffer(0), mDepth(0), mColor(0), mSamples(0), mSize(0, 0) { }
 
     /// Create a new framebuffer with the specified size and number of MSAA samples
     void init(const Vector2i &size, int nSamples);
@@ -510,7 +510,7 @@ public:
     void downloadTGA(const std::string &filename);
 protected:
     GLuint mFramebuffer, mDepth, mColor;
-    Vector2i mSize;
+    Area2i mSize;
     int mSamples;
 public:
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW

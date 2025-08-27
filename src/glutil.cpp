@@ -341,7 +341,7 @@ void GLUniformBuffer::update(const std::vector<uint8_t> &data) {
 //  ----------------------------------------------------
 
 void GLFramebuffer::init(const Vector2i &size, int nSamples) {
-    mSize = size;
+    mSize = Area2i(size[0], size[1]);
     mSamples = nSamples;
 
     glGenRenderbuffers(1, &mColor);
@@ -406,6 +406,7 @@ void GLFramebuffer::blit() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+#if 0
 void GLFramebuffer::downloadTGA(const std::string &filename) {
     uint8_t *temp = new uint8_t[mSize.prod() * 4];
 
@@ -450,7 +451,7 @@ void GLFramebuffer::downloadTGA(const std::string &filename) {
     delete[] temp;
     std::cout << "done." << std::endl;
 }
-
+#endif
 //  ----------------------------------------------------
 
 Eigen::Vector3f project(const Eigen::Vector3f &obj,

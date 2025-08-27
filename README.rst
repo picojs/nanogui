@@ -97,7 +97,7 @@ slider and text box on the bottom of the second window (see the screenshot).
 
    /* Add a textbox and set defaults */
    TextBox *textBox = new TextBox(panel);
-   textBox->setFixedSize(Vector2i(60, 25));
+   textBox->setFixedSize(Area2i(60, 25));
    textBox->setValue("50");
    textBox->setUnits("%");
 
@@ -122,7 +122,7 @@ The Python version of this same piece of code looks like this:
 
    # Add a textbox and set defaults
    textBox = TextBox(panel)
-   textBox.setFixedSize(Vector2i(60, 25))
+   textBox.setFixedSize(Area2i(60, 25))
    textBox.setValue("50")
    textBox.setUnits("%")
 

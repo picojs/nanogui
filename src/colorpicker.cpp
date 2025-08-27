@@ -34,13 +34,13 @@ ColorPicker::ColorPicker(Widget *parent, const Color& color) : PopupButton(paren
     mPickButton = new Button(popup, "Pick");
     mPickButton->setBackgroundColor(color);
     mPickButton->setTextColor(color.contrastingColor());
-    mPickButton->setFixedSize(Vector2i(100, 20));
+    mPickButton->setFixedSize(Area2i(100, 20));
 
     // set the reset button to the specified color
     mResetButton = new Button(popup, "Reset");
     mResetButton->setBackgroundColor(color);
     mResetButton->setTextColor(color.contrastingColor());
-    mResetButton->setFixedSize(Vector2i(100, 20));
+    mResetButton->setFixedSize(Area2i(100, 20));
 
     PopupButton::setChangeCallback([&](bool) {
         if (this->mPickButton->pushed()) {

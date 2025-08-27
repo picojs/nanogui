@@ -19,8 +19,6 @@ set(SRC
     ${INCROOT}/common.h
     ${SRCROOT}/common.cpp
     ${INCROOT}/formhelper.h
-    ${INCROOT}/glcanvas.h
-    ${SRCROOT}/glcanvas.cpp
     ${INCROOT}/glutil.h
     ${SRCROOT}/glutil.cpp
     ${INCROOT}/graph.h

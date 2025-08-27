@@ -12,6 +12,7 @@ option(NANOGUI_USE_GLAD       "Use Glad OpenGL loader library"    ON)
 option(NANOGUI_INSTALL        "Install NanoGUI on `make install`" OFF)
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(cmake/deps.cmake)
 

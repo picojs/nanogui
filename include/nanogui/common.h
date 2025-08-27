@@ -544,6 +544,13 @@ public:
     bool operator==(const Area2<T>& other) const { return mW == other.mW && mH == other.mH; }
     bool operator!=(const Area2<T>& other) const { return !(*this == other); }
 
+    template<typename S>
+    Area2<S> cast() const { return Area2<S>(static_cast<S>(mW), static_cast<S>(mH)); }
+
+    Area2<T> operator*(T c) { return Area2<T>(c * mW, c * mH); }
+
+    T operator[](int index) { if (0 == index) return mW; if (1 == index) return mH; return  0; }
+
 private:
     T mW;
     T mH;

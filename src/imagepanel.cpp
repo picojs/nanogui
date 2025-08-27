@@ -19,12 +19,12 @@ ImagePanel::ImagePanel(Widget *parent)
     : Widget(parent), mThumbSize(64), mSpacing(10), mMargin(10),
       mMouseIndex(-1) {}
 
-Vector2i ImagePanel::gridSize() const {
+Area2i ImagePanel::gridSize() const {
     int nCols = 1 + std::max(0,
         (int) ((mSize.w() - 2 * mMargin - mThumbSize) /
         (float) (mThumbSize + mSpacing)));
     int nRows = ((int) mImages.size() + nCols - 1) / nCols;
-    return Vector2i(nCols, nRows);
+    return Area2i(nCols, nRows);
 }
 
 int ImagePanel::indexForPosition(const Vector2i &p) const {
@@ -53,16 +53,16 @@ bool ImagePanel::mouseButtonEvent(const Vector2i &p, int /* button */, bool down
     return true;
 }
 
-Vector2i ImagePanel::preferredSize(NVGcontext *) const {
-    Vector2i grid = gridSize();
-    return Vector2i(
-        grid.x() * mThumbSize + (grid.x() - 1) * mSpacing + 2*mMargin,
-        grid.y() * mThumbSize + (grid.y() - 1) * mSpacing + 2*mMargin
+Area2i ImagePanel::preferredSize(NVGcontext *) const {
+    Area2i grid = gridSize();
+    return Area2i(
+        grid.w() * mThumbSize + (grid.w() - 1) * mSpacing + 2*mMargin,
+        grid.h() * mThumbSize + (grid.h() - 1) * mSpacing + 2*mMargin
     );
 }
 
 void ImagePanel::draw(NVGcontext* ctx) {
-    Vector2i grid = gridSize();
+    Area2i grid = gridSize();
 
     for (size_t i=0; i<mImages.size(); ++i) {
         Vector2i p = mPos + Vector2i::Constant(mMargin) +

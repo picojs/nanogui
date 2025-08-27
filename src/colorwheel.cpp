@@ -163,8 +163,8 @@ bool ColorWheel::mouseDragEvent(const Vector2i &p, const Vector2i &,
 ColorWheel::Region ColorWheel::adjustPosition(const Vector2i &p, Region consideredRegions) {
     float x = p.x() - mPos.x(),
           y = p.y() - mPos.y(),
-          w = mSize.x(),
-          h = mSize.y();
+          w = mSize.w(),
+          h = mSize.h();
 
     float cx = w*0.5f;
     float cy = h*0.5f;
