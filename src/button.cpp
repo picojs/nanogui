@@ -22,7 +22,7 @@ Button::Button(Widget *parent, const std::string &caption, int icon)
       mFlags(NormalButton), mBackgroundColor(Color(0, 0)),
       mTextColor(Color(0, 0)) { }
 
-Areai Button::preferredSize(NVGcontext *ctx) const {
+Area2i Button::preferredSize(NVGcontext *ctx) const {
     int fontSize = mFontSize == -1 ? mTheme->mButtonFontSize : mFontSize;
     nvgFontSize(ctx, fontSize);
     nvgFontFace(ctx, "sans-bold");
@@ -43,7 +43,7 @@ Areai Button::preferredSize(NVGcontext *ctx) const {
             iw = w * ih / h;
         }
     }
-    return Areai((int)(tw + iw) + 20, fontSize + 10);
+    return Area2i((int)(tw + iw) + 20, fontSize + 10);
 }
 
 bool Button::mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers) {
@@ -157,7 +157,11 @@ void Button::draw(NVGcontext *ctx) {
     nvgFontFace(ctx, "sans-bold");
     float tw = nvgTextBounds(ctx, 0,0, mCaption.c_str(), nullptr, nullptr);
 
-    Vector2f center = mPos.cast<float>() + mSize.cast<float>() * 0.5f;
+    float center_x = static_cast<float>(mPos.x()) + static_cast<float>(mSize.w()) * 0.5f;
+    float center_y = static_cast<float>(mPos.y()) + static_cast<float>(mSize.h()) * 0.5f;
+
+    Vector2f center(center_x, center_y);
+
     Vector2f textPos(center.x() - tw * 0.5f, center.y() - 1);
     NVGcolor textColor =
         mTextColor.w() == 0 ? mTheme->mTextColor : mTextColor;

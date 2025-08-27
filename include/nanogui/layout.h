@@ -66,7 +66,7 @@ public:
      *     The preferred size, accounting for things such as spacing, padding
      *     for icons, etc.
      */
-    virtual Areai preferredSize(NVGcontext *ctx, const Widget *widget) const = 0;
+    virtual Area2i preferredSize(NVGcontext *ctx, const Widget *widget) const = 0;
 
 protected:
     /// Default destructor (exists for inheritance).
@@ -128,7 +128,7 @@ public:
 
     /* Implementation of the layout interface */
     /// See \ref Layout::preferredSize.
-    virtual Vector2i preferredSize(NVGcontext *ctx, const Widget *widget) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx, const Widget *widget) const override;
 
     /// See \ref Layout::performLayout.
     virtual void performLayout(NVGcontext *ctx, Widget *widget) const override;
@@ -207,7 +207,7 @@ public:
 
     /* Implementation of the layout interface */
     /// See \ref Layout::preferredSize.
-    virtual Vector2i preferredSize(NVGcontext *ctx, const Widget *widget) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx, const Widget *widget) const override;
 
     /// See \ref Layout::performLayout.
     virtual void performLayout(NVGcontext *ctx, Widget *widget) const override;
@@ -319,7 +319,7 @@ public:
 
     /* Implementation of the layout interface */
     /// See \ref Layout::preferredSize.
-    virtual Vector2i preferredSize(NVGcontext *ctx, const Widget *widget) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx, const Widget *widget) const override;
 
     /// See \ref Layout::performLayout.
     virtual void performLayout(NVGcontext *ctx, Widget *widget) const override;
@@ -466,7 +466,7 @@ public:
 
     /* Implementation of the layout interface */
     /// See \ref Layout::preferredSize.
-    virtual Vector2i preferredSize(NVGcontext *ctx, const Widget *widget) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx, const Widget *widget) const override;
 
     /// See \ref Layout::performLayout.
     virtual void performLayout(NVGcontext *ctx, Widget *widget) const override;

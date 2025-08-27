@@ -94,7 +94,7 @@ public:
     std::pair<Vector2i, Vector2i> activeButtonArea() const;
 
     virtual void performLayout(NVGcontext* ctx) override;
-    virtual Vector2i preferredSize(NVGcontext* ctx) const override;
+    virtual Area2i preferredSize(NVGcontext* ctx) const override;
     virtual bool mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers) override;
 
     virtual void draw(NVGcontext* ctx) override;
@@ -116,7 +116,7 @@ private:
         void setSize(const Vector2i& size) { mSize = size; }
         const Vector2i& size() const { return mSize; }
 
-        Vector2i preferredSize(NVGcontext* ctx) const;
+        Area2i preferredSize(NVGcontext* ctx) const;
         void calculateVisibleString(NVGcontext* ctx);
         void drawAtPosition(NVGcontext* ctx, const Vector2i& position, bool active);
         void drawActiveBorderAt(NVGcontext * ctx, const Vector2i& position, float offset, const Color& color);

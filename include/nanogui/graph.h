@@ -47,7 +47,7 @@ public:
     VectorXf &values() { return mValues; }
     void setValues(const VectorXf &values) { mValues = values; }
 
-    virtual Vector2i preferredSize(NVGcontext *ctx) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx) const override;
     virtual void draw(NVGcontext *ctx) override;
 
     virtual void save(Serializer &s) const override;

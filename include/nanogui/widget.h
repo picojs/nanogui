@@ -67,9 +67,9 @@ public:
     }
 
     /// Return the size of the widget
-    const Areai &size() const { return mSize; }
+    const Area2i &size() const { return mSize; }
     /// set the size of the widget
-    void setSize(const Areai &size) { mSize = size; }
+    void setSize(const Area2i &size) { mSize = size; }
 
     /// Return the width of the widget
     int width() const { return mSize.w(); }
@@ -90,10 +90,10 @@ public:
      * size; this is done with a call to \ref setSize or a call to \ref performLayout()
      * in the parent widget.
      */
-    void setFixedSize(const Areai &fixedSize) { mFixedSize = fixedSize; }
+    void setFixedSize(const Area2i &fixedSize) { mFixedSize = fixedSize; }
 
     /// Return the fixed size (see \ref setFixedSize())
-    const Areai &fixedSize() const { return mFixedSize; }
+    const Area2i &fixedSize() const { return mFixedSize; }
 
     // Return the fixed width (see \ref setFixedSize())
     int fixedWidth() const { return mFixedSize.w(); }
@@ -212,8 +212,19 @@ public:
 
     /// Check if the widget contains a certain position
     bool contains(const Vector2i &p) const {
-        auto d = (p-mPos).array();
-        return (d >= 0).all() && (d < mSize.array()).all();
+
+        int px = p.x();
+        int py = p.y();
+
+        int x = mPos.x();
+        int y = mPos.y();
+        int w = mSize.w();
+        int h = mSize.h();
+
+        return px > x  &&
+               py > y &&
+               px < x + w &&
+               py < y + h;
     }
 
     /// Determine the widget located at the given position value (recursive)
@@ -244,7 +255,7 @@ public:
     virtual bool keyboardCharacterEvent(unsigned int codepoint);
 
     /// Compute the preferred size of the widget
-    virtual Areai preferredSize(NVGcontext *ctx) const;
+    virtual Area2i preferredSize(NVGcontext *ctx) const;
 
     /// Invoke the associated layout generator to properly place child widgets, if any
     virtual void performLayout(NVGcontext *ctx);
@@ -280,7 +291,7 @@ protected:
     ref<Layout> mLayout;
     std::string mId;
     Vector2i mPos;
-    Areai mSize, mFixedSize;
+    Area2i mSize, mFixedSize;
     std::vector<Widget *> mChildren;
 
     /**

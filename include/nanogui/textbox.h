@@ -89,7 +89,7 @@ public:
     virtual bool keyboardEvent(int key, int scancode, int action, int modifiers) override;
     virtual bool keyboardCharacterEvent(unsigned int codepoint) override;
 
-    virtual Vector2i preferredSize(NVGcontext *ctx) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx) const override;
     virtual void draw(NVGcontext* ctx) override;
     virtual void save(Serializer &s) const override;
     virtual bool load(Serializer &s) override;

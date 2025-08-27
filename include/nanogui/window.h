@@ -54,7 +54,7 @@ public:
     /// Accept scroll events and propagate them to the widget under the mouse cursor
     virtual bool scrollEvent(const Vector2i &p, const Vector2f &rel) override;
     /// Compute the preferred size of the widget
-    virtual Vector2i preferredSize(NVGcontext *ctx) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx) const override;
     /// Invoke the associated layout generator to properly place child widgets, if any
     virtual void performLayout(NVGcontext *ctx) override;
     virtual void save(Serializer &s) const override;

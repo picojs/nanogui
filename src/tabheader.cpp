@@ -33,14 +33,14 @@ Vector2i TabHeader::TabButton::preferredSize(NVGcontext *ctx) const {
 void TabHeader::TabButton::calculateVisibleString(NVGcontext *ctx) {
     // The size must have been set in by the enclosing tab header.
     NVGtextRow displayedText;
-    nvgTextBreakLines(ctx, mLabel.c_str(), nullptr, mSize.x(), &displayedText, 1);
+    nvgTextBreakLines(ctx, mLabel.c_str(), nullptr, mSize.w(), &displayedText, 1);
 
     // Check to see if the text need to be truncated.
     if (displayedText.next[0]) {
         auto truncatedWidth = nvgTextBounds(ctx, 0.0f, 0.0f,
                                             displayedText.start, displayedText.end, nullptr);
         auto dotsWidth = nvgTextBounds(ctx, 0.0f, 0.0f, dots, nullptr, nullptr);
-        while ((truncatedWidth + dotsWidth + mHeader->theme()->mTabButtonHorizontalPadding) > mSize.x()
+        while ((truncatedWidth + dotsWidth + mHeader->theme()->mTabButtonHorizontalPadding) > mSize.w()
                 && displayedText.end != displayedText.start) {
             --displayedText.end;
             truncatedWidth = nvgTextBounds(ctx, 0.0f, 0.0f,
@@ -209,7 +209,7 @@ int TabHeader::tabIndex(const std::string &label) {
 void TabHeader::ensureTabVisible(int index) {
     auto visibleArea = visibleButtonArea();
     auto visibleWidth = visibleArea.second.x() - visibleArea.first.x();
-    int allowedVisibleWidth = mSize.x() - 2 * theme()->mTabControlWidth;
+    int allowedVisibleWidth = mSize.w() - 2 * theme()->mTabControlWidth;
     assert(allowedVisibleWidth >= visibleWidth);
     assert(index >= 0 && index < (int) mTabButtons.size());
 
@@ -391,7 +391,7 @@ void TabHeader::calculateVisibleEnd() {
     auto first = visibleBegin();
     auto last = mTabButtons.end();
     int currentPosition = theme()->mTabControlWidth;
-    int lastPosition = mSize.x() - theme()->mTabControlWidth;
+    int lastPosition = mSize.w() - theme()->mTabControlWidth;
     auto firstInvisible = std::find_if(first, last,
                                        [&currentPosition, lastPosition](const TabButton& tb) {
         currentPosition += tb.size().x();
@@ -421,7 +421,7 @@ void TabHeader::drawControls(NVGcontext* ctx) {
     nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
     float yScaleLeft = 0.5f;
     float xScaleLeft = 0.2f;
-    Vector2f leftIconPos = mPos.cast<float>() + Vector2f(xScaleLeft*theme()->mTabControlWidth, yScaleLeft*mSize.cast<float>().y());
+    Vector2f leftIconPos = mPos.cast<float>() + Vector2f(xScaleLeft*theme()->mTabControlWidth, yScaleLeft*mSize.cast<float>().h());
     nvgText(ctx, leftIconPos.x(), leftIconPos.y() + 1, iconLeft.data(), nullptr);
 
     // Right button.
@@ -443,7 +443,7 @@ void TabHeader::drawControls(NVGcontext* ctx) {
     nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
     float yScaleRight = 0.5f;
     float xScaleRight = 1.0f - xScaleLeft - rightWidth / theme()->mTabControlWidth;
-    Vector2f rightIconPos = mPos.cast<float>() + Vector2f(mSize.cast<float>().x(), mSize.cast<float>().y()*yScaleRight) -
+    Vector2f rightIconPos = mPos.cast<float>() + Vector2f(mSize.cast<float>().w(), mSize.cast<float>().h()*yScaleRight) -
                             Vector2f(xScaleRight*theme()->mTabControlWidth + rightWidth, 0);
 
     nvgText(ctx, rightIconPos.x(), rightIconPos.y() + 1, iconRight.data(), nullptr);
@@ -451,11 +451,11 @@ void TabHeader::drawControls(NVGcontext* ctx) {
 
 TabHeader::ClickLocation TabHeader::locateClick(const Vector2i& p) {
     auto leftDistance = (p - mPos).array();
-    bool hitLeft = (leftDistance >= 0).all() && (leftDistance < Vector2i(theme()->mTabControlWidth, mSize.y()).array()).all();
+    bool hitLeft = (leftDistance >= 0).all() && (leftDistance < Vector2i(theme()->mTabControlWidth, mSize.h()).array()).all();
     if (hitLeft)
         return ClickLocation::LeftControls;
     auto rightDistance = (p - (mPos + Vector2i(mSize.x() - theme()->mTabControlWidth, 0))).array();
-    bool hitRight = (rightDistance >= 0).all() && (rightDistance < Vector2i(theme()->mTabControlWidth, mSize.y()).array()).all();
+    bool hitRight = (rightDistance >= 0).all() && (rightDistance < Vector2i(theme()->mTabControlWidth, mSize.h()).array()).all();
     if (hitRight)
         return ClickLocation::RightControls;
     return ClickLocation::TabButtons;

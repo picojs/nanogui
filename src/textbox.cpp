@@ -59,8 +59,8 @@ void TextBox::setTheme(Theme *theme) {
         mFontSize = mTheme->mTextBoxFontSize;
 }
 
-Areai TextBox::preferredSize(NVGcontext *ctx) const {
-    Areai size(0, fontSize() * 1.4f);
+Area2i TextBox::preferredSize(NVGcontext *ctx) const {
+    Area2i size(0, fontSize() * 1.4f);
 
     float uw = 0;
     if (mUnitsImage > 0) {

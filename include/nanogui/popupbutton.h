@@ -44,7 +44,7 @@ public:
     const Popup *popup() const { return mPopup; }
 
     virtual void draw(NVGcontext* ctx) override;
-    virtual Vector2i preferredSize(NVGcontext *ctx) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx) const override;
     virtual void performLayout(NVGcontext *ctx) override;
 
     virtual void save(Serializer &s) const override;

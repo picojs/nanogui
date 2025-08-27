@@ -48,7 +48,7 @@ int Widget::fontSize() const {
     return (mFontSize < 0 && mTheme) ? mTheme->mStandardFontSize : mFontSize;
 }
 
-Areai Widget::preferredSize(NVGcontext *ctx) const {
+Area2i Widget::preferredSize(NVGcontext *ctx) const {
     if (mLayout)
         return mLayout->preferredSize(ctx, this);
     else
@@ -206,7 +206,7 @@ void Widget::draw(NVGcontext *ctx) {
     #if NANOGUI_SHOW_WIDGET_BOUNDS
         nvgStrokeWidth(ctx, 1.0f);
         nvgBeginPath(ctx);
-        nvgRect(ctx, mPos.x() - 0.5f, mPos.y() - 0.5f, mSize.x() + 1, mSize.y() + 1);
+        nvgRect(ctx, mPos.x() - 0.5f, mPos.y() - 0.5f, mSize.w() + 1, mSize.h() + 1);
         nvgStrokeColor(ctx, nvgRGBA(255, 0, 0, 255));
         nvgStroke(ctx);
     #endif
@@ -219,7 +219,7 @@ void Widget::draw(NVGcontext *ctx) {
     for (auto child : mChildren) {
         if (child->visible()) {
             nvgSave(ctx);
-            nvgIntersectScissor(ctx, child->mPos.x(), child->mPos.y(), child->mSize.x(), child->mSize.y());
+            nvgIntersectScissor(ctx, child->mPos.x(), child->mPos.y(), child->mSize.w(), child->mSize.h());
             child->draw(ctx);
             nvgRestore(ctx);
         }

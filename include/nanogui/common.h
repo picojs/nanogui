@@ -528,10 +528,10 @@ extern NANOGUI_EXPORT std::vector<std::pair<int, std::string>>
 extern NANOGUI_EXPORT int __nanogui_get_image(NVGcontext *ctx, const std::string &name, uint8_t *data, uint32_t size);
 
 template<typename T>
-class Area
+class Area2
 {
 public:
-    Area(T w, T h) : mW(w), mH(h) {}
+    Area2(T w, T h) : mW(w), mH(h) {}
 
     T w() const { return mW; }
     T h() const { return mH; }
@@ -539,16 +539,22 @@ public:
     void setW(T w) { mW = w; }
     void setH(T h) { mH = h; }
 
+    static Area2<T> Zero() { return Area2<T>(0, 0); }
+
+    bool operator==(const Area2<T>& other) const { return mW == other.mW && mH == other.mH; }
+    bool operator!=(const Area2<T>& other) const { return !(*this == other); }
+
 private:
     T mW;
     T mH;
 };
+#if 0
 
 template<typename T>
-class Point
-{
+class Point2
+
 public:
-    Point(T x, T y) : mX(x), mY(y) {}
+    Point2(T x, T y) : mX(x), mY(y) {}
 
     T x() const { return mX; }
     T y() const { return mY; }
@@ -562,10 +568,10 @@ private:
 };
 
 template<typename T>
-class Rect
+class Rect2
 {
 public:
-    Rect(T x, T y, T w, T h) : mX(x), mY(y), mW(w), mH(h) {}
+    Rect2(T x, T y, T w, T h) : mX(x), mY(y), mW(w), mH(h) {}
 
     T x() const { return mX; }
     T y() const { return mY; }
@@ -583,14 +589,17 @@ private:
     T mW;
     T mH;
 };
+#endif
 
-using Areai = Area<int>;
-using Areaf = Area<float>;
+using Area2i = Area2<int>;
+using Area2f = Area2<float>;
 
-using Pointi = Point<int>;
-using Pointf = Point<float>;
+#if 0
+using Point2i = Point2<int>;
+using Point2f = Point2<float>;
 
-using Recti = Rect<int>;
-using Rectf = Rect<float>;
+using Rect2i = Rect2<int>;
+using Rect2f = Rect2<float>;
+#endif
 
 NAMESPACE_END(nanogui)

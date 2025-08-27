@@ -48,7 +48,7 @@ public:
     virtual void setTheme(Theme *theme) override;
 
     /// Compute the size needed to fully display the label
-    virtual Vector2i preferredSize(NVGcontext *ctx) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx) const override;
 
     /// Draw the label
     virtual void draw(NVGcontext *ctx) override;

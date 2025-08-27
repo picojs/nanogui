@@ -115,7 +115,7 @@ public:
     const std::vector<Button *> &buttonGroup() const { return mButtonGroup; }
 
     /// The preferred size of this Button.
-    virtual Areai preferredSize(NVGcontext *ctx) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx) const override;
 
     /// The callback that is called when any type of mouse button event is issued to this Button.
     virtual bool mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers) override;

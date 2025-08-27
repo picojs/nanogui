@@ -51,7 +51,7 @@ public:
     void setColor(const Color& color);
 
     /// The preferred size of this ColorWheel.
-    virtual Vector2i preferredSize(NVGcontext *ctx) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx) const override;
 
     /// Draws the ColorWheel.
     virtual void draw(NVGcontext *ctx) override;

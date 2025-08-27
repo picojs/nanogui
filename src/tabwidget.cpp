@@ -150,10 +150,10 @@ void TabWidget::performLayout(NVGcontext* ctx) {
     int headerHeight = mHeader->preferredSize(ctx).y();
     int margin = mTheme->mTabInnerMargin;
     mHeader->setPosition({ 0, 0 });
-    mHeader->setSize({ mSize.x(), headerHeight });
+    mHeader->setSize({ mSize.w(), headerHeight });
     mHeader->performLayout(ctx);
     mContent->setPosition({ margin, headerHeight + margin });
-    mContent->setSize({ mSize.x() - 2 * margin, mSize.y() - 2*margin - headerHeight });
+    mContent->setSize({ mSize.w() - 2 * margin, mSize.h() - 2*margin - headerHeight });
     mContent->performLayout(ctx);
 }
 
@@ -174,22 +174,22 @@ void TabWidget::draw(NVGcontext* ctx) {
     for (int i = 0; i < 3; ++i) {
         nvgSave(ctx);
         if (i == 0)
-            nvgIntersectScissor(ctx, mPos.x(), mPos.y(), activeArea.first.x() + 1, mSize.y());
+            nvgIntersectScissor(ctx, mPos.x(), mPos.y(), activeArea.first.x() + 1, mSize.h());
         else if (i == 1)
-            nvgIntersectScissor(ctx, mPos.x() + activeArea.second.x(), mPos.y(), mSize.x() - activeArea.second.x(), mSize.y());
+            nvgIntersectScissor(ctx, mPos.x() + activeArea.second.x(), mPos.y(), mSize.w() - activeArea.second.x(), mSize.h());
         else
-            nvgIntersectScissor(ctx, mPos.x(), mPos.y() + tabHeight + 2, mSize.x(), mSize.y());
+            nvgIntersectScissor(ctx, mPos.x(), mPos.y() + tabHeight + 2, mSize.w(), mSize.h());
 
         nvgBeginPath(ctx);
         nvgStrokeWidth(ctx, 1.0f);
-        nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + tabHeight + 1.5f, mSize.x() - 1,
+        nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + tabHeight + 1.5f, mSize.w() - 1,
                        mSize.y() - tabHeight - 2, mTheme->mButtonCornerRadius);
         nvgStrokeColor(ctx, mTheme->mBorderLight);
         nvgStroke(ctx);
 
         nvgBeginPath(ctx);
-        nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + tabHeight + 0.5f, mSize.x() - 1,
-                       mSize.y() - tabHeight - 2, mTheme->mButtonCornerRadius);
+        nvgRoundedRect(ctx, mPos.x() + 0.5f, mPos.y() + tabHeight + 0.5f, mSize.w() - 1,
+                       mSize.h() - tabHeight - 2, mTheme->mButtonCornerRadius);
         nvgStrokeColor(ctx, mTheme->mBorderDark);
         nvgStroke(ctx);
         nvgRestore(ctx);

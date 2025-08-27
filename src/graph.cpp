@@ -23,8 +23,8 @@ Graph::Graph(Widget *parent, const std::string &caption)
     mTextColor = Color(240, 192);
 }
 
-Areai Graph::preferredSize(NVGcontext *) const {
-    return Areai(180, 45);
+Area2i Graph::preferredSize(NVGcontext *) const {
+    return Area2i(180, 45);
 }
 
 void Graph::draw(NVGcontext *ctx) {

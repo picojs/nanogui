@@ -93,7 +93,7 @@ public:
     virtual bool mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers) override;
 
     /// The preferred size of this CheckBox.
-    virtual Vector2i preferredSize(NVGcontext *ctx) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx) const override;
 
     /// Draws this CheckBox.
     virtual void draw(NVGcontext *ctx) override;

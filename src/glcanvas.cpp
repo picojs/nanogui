@@ -31,10 +31,10 @@ void GLCanvas::drawWidgetBorder(NVGcontext *ctx) const {
     nvgBeginPath(ctx);
     nvgStrokeWidth(ctx, 1.0f);
     nvgRoundedRect(ctx, mPos.x() - 0.5f, mPos.y() - 0.5f,
-                   mSize.x() + 1, mSize.y() + 1, mTheme->mWindowCornerRadius);
+                   mSize.w() + 1, mSize.h() + 1, mTheme->mWindowCornerRadius);
     nvgStrokeColor(ctx, mTheme->mBorderLight);
     nvgRoundedRect(ctx, mPos.x() - 1.0f, mPos.y() - 1.0f,
-                   mSize.x() + 2, mSize.y() + 2, mTheme->mWindowCornerRadius);
+                   mSize.w() + 2, mSize.h() + 2, mTheme->mWindowCornerRadius);
     nvgStrokeColor(ctx, mTheme->mBorderDark);
     nvgStroke(ctx);
 }

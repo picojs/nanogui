@@ -41,7 +41,7 @@
     bool keyboardCharacterEvent(unsigned int codepoint) { \
         PYBIND11_OVERLOAD(bool, Parent, keyboardCharacterEvent, codepoint); \
     } \
-    ::nanogui::Vector2i preferredSize(NVGcontext *ctx) const { \
+    ::nanogui::Area2i preferredSize(NVGcontext *ctx) const { \
         PYBIND11_OVERLOAD(::nanogui::Vector2i, Parent, preferredSize, ctx); \
     } \
     void performLayout(NVGcontext *ctx) { \
@@ -53,7 +53,7 @@
 
 /// Provides a ``PYBIND11_OVERLOAD`` for any relevant Layout items that need to be bound.
 #define NANOGUI_LAYOUT_OVERLOADS(Parent) \
-    ::nanogui::Vector2i preferredSize(NVGcontext *ctx, const ::nanogui::Widget *widget) const { \
+    ::nanogui::Area2i preferredSize(NVGcontext *ctx, const ::nanogui::Widget *widget) const { \
         PYBIND11_OVERLOAD(::nanogui::Vector2i, Parent, preferredSize, ctx, widget); \
     } \
     void performLayout(NVGcontext *ctx, ::nanogui::Widget *widget) const { \

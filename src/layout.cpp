@@ -26,8 +26,8 @@ BoxLayout::BoxLayout(Orientation orientation, Alignment alignment,
       mSpacing(spacing) {
 }
 
-Areai BoxLayout::preferredSize(NVGcontext *ctx, const Widget *widget) const {
-    Areai size(2*mMargin, 2*mMargin);
+Area2i BoxLayout::preferredSize(NVGcontext *ctx, const Widget *widget) const {
+    Area2i size(2*mMargin, 2*mMargin);
 
     int yOffset = 0;
     const Window *window = dynamic_cast<const Window *>(widget);
@@ -123,7 +123,7 @@ void BoxLayout::performLayout(NVGcontext *ctx, Widget *widget) const {
     }
 }
 
-Areai GroupLayout::preferredSize(NVGcontext *ctx, const Widget *widget) const {
+Area2i GroupLayout::preferredSize(NVGcontext *ctx, const Widget *widget) const {
     int height = mMargin, width = 2*mMargin;
 
     const Window *window = dynamic_cast<const Window *>(widget);
@@ -153,7 +153,7 @@ Areai GroupLayout::preferredSize(NVGcontext *ctx, const Widget *widget) const {
             indent = !label->caption().empty();
     }
     height += mMargin;
-    return Areai(width, height);
+    return Area2i(width, height);
 }
 
 void GroupLayout::performLayout(NVGcontext *ctx, Widget *widget) const {
@@ -194,13 +194,13 @@ void GroupLayout::performLayout(NVGcontext *ctx, Widget *widget) const {
     }
 }
 
-Areai GridLayout::preferredSize(NVGcontext *ctx,
+Area2i GridLayout::preferredSize(NVGcontext *ctx,
                                    const Widget *widget) const {
     /* Compute minimum row / column sizes */
     std::vector<int> grid[2];
     computeLayout(ctx, widget, grid);
 
-    Areai size(
+    Area2i size(
         2*mMargin + std::accumulate(grid[0].begin(), grid[0].end(), 0)
          + std::max((int) grid[0].size() - 1, 0) * mSpacing[0],
         2*mMargin + std::accumulate(grid[1].begin(), grid[1].end(), 0)
@@ -347,12 +347,12 @@ AdvancedGridLayout::AdvancedGridLayout(const std::vector<int> &cols, const std::
     mRowStretch.resize(mRows.size(), 0);
 }
 
-Areai AdvancedGridLayout::preferredSize(NVGcontext *ctx, const Widget *widget) const {
+Area2i AdvancedGridLayout::preferredSize(NVGcontext *ctx, const Widget *widget) const {
     /* Compute minimum row / column sizes */
     std::vector<int> grid[2];
     computeLayout(ctx, widget, grid);
 
-    Areai size(
+    Area2i size(
         std::accumulate(grid[0].begin(), grid[0].end(), 0),
         std::accumulate(grid[1].begin(), grid[1].end(), 0));
 

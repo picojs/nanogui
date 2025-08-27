@@ -178,7 +178,7 @@ public:
     Widget *tab(int index);
 
     virtual void performLayout(NVGcontext* ctx) override;
-    virtual Vector2i preferredSize(NVGcontext* ctx) const override;
+    virtual Area2i preferredSize(NVGcontext* ctx) const override;
     virtual void draw(NVGcontext* ctx) override;
 
 private:

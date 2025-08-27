@@ -62,7 +62,7 @@ void Label::draw(NVGcontext *ctx) {
         nvgTextBox(ctx, mPos.x(), mPos.y(), mFixedSize.x(), mCaption.c_str(), nullptr);
     } else {
         nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
-        nvgText(ctx, mPos.x(), mPos.y() + mSize.y() * 0.5f, mCaption.c_str(), nullptr);
+        nvgText(ctx, mPos.x(), mPos.y() + mSize.h() * 0.5f, mCaption.c_str(), nullptr);
     }
 }
 

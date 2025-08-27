@@ -414,13 +414,13 @@ void GLFramebuffer::downloadTGA(const std::string &filename) {
     glPixelStorei(GL_PACK_ALIGNMENT, 1);
     glBindFramebuffer(GL_READ_FRAMEBUFFER, mFramebuffer);
     glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);
-    glReadPixels(0, 0, mSize.x(), mSize.y(), GL_BGRA, GL_UNSIGNED_BYTE, temp);
+    glReadPixels(0, 0, mSize.w(), mSize.h(), GL_BGRA, GL_UNSIGNED_BYTE, temp);
     glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
 
-    uint32_t rowSize = mSize.x() * 4;
-    uint32_t halfHeight = mSize.y() / 2;
+    uint32_t rowSize = mSize.w() * 4;
+    uint32_t halfHeight = mSize.h() / 2;
     uint8_t *line = (uint8_t *) alloca(rowSize);
-    for (uint32_t i=0, j=mSize.y()-1; i<halfHeight; ++i) {
+    for (uint32_t i=0, j=mSize.h()-1; i<halfHeight; ++i) {
         memcpy(line, temp + i * rowSize, rowSize);
         memcpy(temp + i * rowSize, temp + j * rowSize, rowSize);
         memcpy(temp + j * rowSize, line, rowSize);
@@ -438,10 +438,10 @@ void GLFramebuffer::downloadTGA(const std::string &filename) {
     fputc(0, tga); /* Color map entry size (unused) */
     fputc(0, tga); fputc(0, tga);  /* X offset */
     fputc(0, tga); fputc(0, tga);  /* Y offset */
-    fputc(mSize.x() % 256, tga); /* Width */
-    fputc(mSize.x() / 256, tga); /* continued */
-    fputc(mSize.y() % 256, tga); /* Height */
-    fputc(mSize.y() / 256, tga); /* continued */
+    fputc(mSize.w() % 256, tga); /* Width */
+    fputc(mSize.w() / 256, tga); /* continued */
+    fputc(mSize.h() % 256, tga); /* Height */
+    fputc(mSize.h() / 256, tga); /* continued */
     fputc(32, tga);   /* Bits per pixel */
     fputc(0x20, tga); /* Scan from top left */
     fwrite(temp, mSize.prod() * 4, 1, tga);

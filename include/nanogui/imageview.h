@@ -128,7 +128,7 @@ public:
     /// Function indicating whether any of the overlays are visible.
     bool helpersVisible() const;
 
-    Vector2i preferredSize(NVGcontext* ctx) const override;
+    Area2i preferredSize(NVGcontext* ctx) const override;
     void performLayout(NVGcontext* ctx) override;
     void draw(NVGcontext* ctx) override;
 

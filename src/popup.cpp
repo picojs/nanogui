@@ -53,24 +53,24 @@ void Popup::draw(NVGcontext* ctx) {
 
     /* Draw a drop shadow */
     NVGpaint shadowPaint = nvgBoxGradient(
-        ctx, mPos.x(), mPos.y(), mSize.x(), mSize.y(), cr*2, ds*2,
+        ctx, mPos.x(), mPos.y(), mSize.w(), mSize.h(), cr*2, ds*2,
         mTheme->mDropShadow, mTheme->mTransparent);
 
     nvgBeginPath(ctx);
-    nvgRect(ctx, mPos.x()-ds,mPos.y()-ds, mSize.x()+2*ds, mSize.y()+2*ds);
-    nvgRoundedRect(ctx, mPos.x(), mPos.y(), mSize.x(), mSize.y(), cr);
+    nvgRect(ctx, mPos.x()-ds,mPos.y()-ds, mSize.w()+2*ds, mSize.h()+2*ds);
+    nvgRoundedRect(ctx, mPos.x(), mPos.y(), mSize.w(), mSize.h(), cr);
     nvgPathWinding(ctx, NVG_HOLE);
     nvgFillPaint(ctx, shadowPaint);
     nvgFill(ctx);
 
     /* Draw window */
     nvgBeginPath(ctx);
-    nvgRoundedRect(ctx, mPos.x(), mPos.y(), mSize.x(), mSize.y(), cr);
+    nvgRoundedRect(ctx, mPos.x(), mPos.y(), mSize.w(), mSize.h(), cr);
 
     Vector2i base = mPos + Vector2i(0, mAnchorHeight);
     int sign = -1;
     if (mSide == Side::Left) {
-        base.x() += mSize.x();
+        base.x() += mSize.w();
         sign = 1;
     }
 

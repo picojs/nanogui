@@ -312,7 +312,7 @@ void Screen::initialize(GLFWwindow *window, bool shutdownGLFWOnDestruct) {
 
 #if defined(_WIN32) || defined(__linux__)
     if (mPixelRatio != 1 && !mFullscreen)
-        glfwSetWindowSize(window, mSize.x() * mPixelRatio, mSize.y() * mPixelRatio);
+        glfwSetWindowSize(window, mSize.w() * mPixelRatio, mSize.h() * mPixelRatio);
 #endif
 
 #if defined(NANOGUI_GLAD)

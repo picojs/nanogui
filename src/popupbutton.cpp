@@ -35,9 +35,9 @@ PopupButton::~PopupButton() {
     mPopup->setVisible(false);
 }
 
-Areai PopupButton::preferredSize(NVGcontext *ctx) const {
-    Areai baseSize = Button::preferredSize(ctx);
-    return Areai(baseSize.w() + 15, baseSize.h());
+Area2i PopupButton::preferredSize(NVGcontext *ctx) const {
+    Area2i baseSize = Button::preferredSize(ctx);
+    return Area2i(baseSize.w() + 15, baseSize.h());
 }
 
 void PopupButton::draw(NVGcontext* ctx) {

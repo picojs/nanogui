@@ -46,12 +46,12 @@ bool CheckBox::mouseButtonEvent(const Vector2i &p, int button, bool down,
     return false;
 }
 
-Areai CheckBox::preferredSize(NVGcontext *ctx) const {
-    if (mFixedSize != Vector2i::Zero())
+Area2i CheckBox::preferredSize(NVGcontext *ctx) const {
+    if (mFixedSize != Area2i::Zero())
         return mFixedSize;
     nvgFontSize(ctx, fontSize());
     nvgFontFace(ctx, "sans");
-    return Areai(
+    return Area2i(
         nvgTextBounds(ctx, 0, 0, mCaption.c_str(), nullptr, nullptr) +
             1.8f * fontSize(),
         fontSize() * 1.3f);

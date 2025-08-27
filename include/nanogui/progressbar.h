@@ -28,7 +28,7 @@ public:
     float value() { return mValue; }
     void setValue(float value) { mValue = value; }
 
-    virtual Vector2i preferredSize(NVGcontext *ctx) const override;
+    virtual Area2i preferredSize(NVGcontext *ctx) const override;
     virtual void draw(NVGcontext* ctx) override;
 
     virtual void save(Serializer &s) const override;
