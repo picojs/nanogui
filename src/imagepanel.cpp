@@ -10,6 +10,7 @@
     BSD-style license that can be found in the LICENSE.txt file.
 */
 
+#include "nanogui/common.h"
 #include <nanogui/imagepanel.h>
 #include <nanogui/opengl.h>
 
@@ -33,10 +34,14 @@ int ImagePanel::indexForPosition(const Vector2i &p) const {
     float iconRegion = mThumbSize / (float)(mThumbSize + mSpacing);
     bool overImage = pp.x() - std::floor(pp.x()) < iconRegion &&
                     pp.y() - std::floor(pp.y()) < iconRegion;
-    Vector2i gridPos = pp.cast<int>(), grid = gridSize();
-    overImage &= ((gridPos.array() >= 0).all() &&
-                 (gridPos.array() < grid.array()).all());
-    return overImage ? (gridPos.x() + gridPos.y() * grid.x()) : -1;
+    Vector2i gridPos = pp.cast<int>();
+
+    Area2i grid = gridSize();
+    overImage &= ((gridPos.x() >= 0 && gridPos.y() >= 0) &&
+                  (gridPos.x() < grid.w() && gridPos.y() < grid.h()));
+
+
+    return overImage ? (gridPos.x() + gridPos.y() * grid.w()) : -1;
 }
 
 bool ImagePanel::mouseMotionEvent(const Vector2i &p, const Vector2i & /* rel */,
@@ -66,7 +71,7 @@ void ImagePanel::draw(NVGcontext* ctx) {
 
     for (size_t i=0; i<mImages.size(); ++i) {
         Vector2i p = mPos + Vector2i::Constant(mMargin) +
-            Vector2i((int) i % grid.x(), (int) i / grid.x()) * (mThumbSize + mSpacing);
+            Vector2i((int) i % grid.w(), (int) i / grid.h()) * (mThumbSize + mSpacing);
         int imgw, imgh;
 
         nvgImageSize(ctx, mImages[i].first, &imgw, &imgh);

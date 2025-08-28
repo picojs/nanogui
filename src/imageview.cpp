@@ -11,6 +11,7 @@
     BSD-style license that can be found in the LICENSE.txt file.
 */
 
+#include "nanogui/common.h"
 #include <nanogui/imageview.h>
 #include <nanogui/window.h>
 #include <nanogui/screen.h>
@@ -293,7 +294,7 @@ void ImageView::draw(NVGcontext* ctx) {
     // properly displayed inside the widget.
     const Screen* screen = dynamic_cast<const Screen*>(this->window()->parent());
     assert(screen);
-    Vector2f screenSize = screen->size().cast<float>();
+    Area2f screenSize = screen->size().cast<float>();
     Vector2f scaleFactor = mScale * imageSizeF().cwiseQuotient(screenSize);
     Vector2f positionInScreen = absolutePosition().cast<float>();
     Vector2f positionAfterOffset = positionInScreen + mOffset;
