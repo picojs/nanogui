@@ -15,6 +15,8 @@ FetchContent_Declare(
     eigen
     GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
     GIT_TAG        21ae2afd4edaa1b69782c67a54182d34efe43f9c # Version 3.4 (Feb 23 2024)
+    GIT_SHALLOW TRUE
+    SOURCE_SUBDIR  cmake
     GIT_PROGRESS TRUE
 )
 
